@@ -10,6 +10,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -34,9 +35,9 @@ fun BroadcastView (
     onSend: (session: BroadcastType, group: BroadcastType, message: String) -> Unit,
     onCancel: () -> Unit
 ) {
-    val (selectedSessionIndex, setSelectedSessionIndex) = remember{ mutableStateOf(0)}
-    val (selectedGroupIndex, setGroupIndex) = remember{ mutableStateOf(0)}
-    val (text, setText) = remember{ mutableStateOf("")}
+    val (selectedSessionIndex, setSelectedSessionIndex) = rememberSaveable { mutableStateOf(0)}
+    val (selectedGroupIndex, setGroupIndex) = rememberSaveable { mutableStateOf(0)}
+    val (text, setText) = rememberSaveable { mutableStateOf("")}
 
     Column (Modifier.verticalScroll(rememberScrollState())){
         BroadcastTitleRow(onCancel = onCancel)
@@ -45,14 +46,13 @@ fun BroadcastView (
             broadcastGroups = broadcastGroups,
             text = text,
             onTextChange = setText,
+            selectedSessionIndex = selectedSessionIndex,
+            onSessionIndexChange = setSelectedSessionIndex,
+            selectedGroupIndex = selectedGroupIndex,
+            onGroupIndexChange = setGroupIndex
         )
 
         Spacer(modifier = Modifier.height(20.dp))
-
-        BroadcastInputText(
-            text,
-            setText,
-        )
 
         BroadcastBottomButtonRow(
             { onSend(broadcastSessions[selectedSessionIndex], broadcastGroups[selectedGroupIndex], text) } ,
@@ -90,14 +90,15 @@ fun BroadcastTitleRow(
 
 @Composable
 fun BroadcastTo(
-    modifier: Modifier = Modifier,
     broadcastSessions: List<BroadcastType>,
     broadcastGroups: List<BroadcastType>,
     text: String,
-    onTextChange: (String) -> Unit
+    onTextChange: (String) -> Unit,
+    selectedSessionIndex: Int,
+    onSessionIndexChange: (Int) -> Unit,
+    selectedGroupIndex: Int,
+    onGroupIndexChange: (Int) -> Unit,
 ){
-    val (selectedSessionIndex, setSelectedSessionIndex) = remember{ mutableStateOf(0)}
-    val (selectedGroupIndex, setGroupIndex) = remember{ mutableStateOf(0)}
 
     Column (modifier = Modifier.padding(start = 32.dp, end = 32.dp)){
         Text(
@@ -114,7 +115,7 @@ fun BroadcastTo(
                     .padding(end = 6.dp),
                 menuItems = broadcastSessions,
                 selectedIndex = selectedSessionIndex,
-                onIndexChange = setSelectedSessionIndex
+                onIndexChange = onSessionIndexChange
             )
             broadcastDropDownMenu(
                 modifier = Modifier
@@ -122,7 +123,7 @@ fun BroadcastTo(
                     .padding(end = 6.dp),
                 menuItems = broadcastGroups,
                 selectedIndex = selectedGroupIndex,
-                onIndexChange = setGroupIndex
+                onIndexChange = onGroupIndexChange
             )
         }
 
