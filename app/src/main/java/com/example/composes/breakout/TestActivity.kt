@@ -47,19 +47,25 @@ class TestActivity : AppCompatActivity() {
         val onShowJoinBreakoutViewClick:()->Unit = {
             openDialog.value = true
         }
+        val onBackPressed:()->Unit = {
+            openDialog.value = false
+        }
+        val onPopUp:()->Unit = {
+            openDialog.value = false
+        }
+        val onClose:()->Unit = {
+            openDialog.value = false
+        }
 
         if (openDialog.value) {
             Dialog(onDismissRequest = { openDialog.value = false }, properties = DialogProperties(usePlatformDefaultWidth = false),) {
                 Card(
                     backgroundColor = MaterialTheme.colors.background
                 ) {
-                    BreakoutSessionJoinComponent().SessionToJoinPanel(breakoutSessionToJoinViewModel = breakoutJoinViewModel)
+                    BreakoutSessionJoinComponent().SessionToJoinPanel(breakoutSessionToJoinViewModel = breakoutJoinViewModel, onBackPressed, onPopUp, onClose)
                 }
             }
         }
-
-
-
 
         Column() {
             Button(

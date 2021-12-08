@@ -11,6 +11,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,8 +40,9 @@ import com.example.composes.breakout.anyonecanjoin.repo.SampleData.USER_TYPE_DEV
 
 class BreakoutSessionJoinComponent {
     @Composable
-    fun SessionToJoinPanel(breakoutSessionToJoinViewModel: BreakoutSessionToJoinViewModel) {
-        Column(Modifier.fillMaxWidth()) {
+    fun SessionToJoinPanel(breakoutSessionToJoinViewModel: BreakoutSessionToJoinViewModel, onBackPressed:()->Unit, onPopUp:()->Unit, onClose:()->Unit) {
+        Column(Modifier.fillMaxSize()) {
+            ActionBar(stringResource(id = R.string.breakout_sessions), onBackPressed, onPopUp, onClose)
             NormalTipPanel(R.string.choose_to_join_breakout_session_tip)
             Spacer(modifier = Modifier.height(10.dp))
             BreakoutSessionToJoinPanel(
@@ -58,7 +61,7 @@ class BreakoutSessionJoinComponent {
     ) {
         val collapsedIds = viewModel.collapsedIDsIdsList.collectAsState()
         LazyColumn(modifier = modifier) {
-            viewModel.breakoutSessions?.onEachIndexed { index, boSessionInfo ->
+            viewModel.breakoutSessions.onEachIndexed { index, boSessionInfo ->
                 val isItemColapsed = collapsedIds.value.contains(boSessionInfo.sessionUUID)
                 // header
                 item {
@@ -69,7 +72,7 @@ class BreakoutSessionJoinComponent {
                     items(boSessionInfo.assignedUserList) { item ->
                         if (item.userType == USER_TYPE_DEVICE) {
                             detail(breakoutUser = item, Modifier.padding(start = 10.dp))
-                            item.associateUsers?.onEachIndexed { _, breakoutUser ->
+                            item.associateUsers?.value?.onEachIndexed { _, breakoutUser ->
                                 detail(breakoutUser = breakoutUser, Modifier.padding(start = 30.dp))
                             }
                         } else {
@@ -118,8 +121,8 @@ class BreakoutSessionJoinComponent {
                     text = stringResource(
                         id = R.string.wait_join_breakout_session_name,
                         breakoutSessionInfo.sessionName,
-                        breakoutSessionInfo.currentJoinedCount,
-                        breakoutSessionInfo.totalAssignedCount
+                        breakoutSessionInfo.currentJoinedCount.value,
+                        breakoutSessionInfo.totalAssignedCount.value
                     )
                 )
             }
@@ -180,7 +183,13 @@ class BreakoutSessionJoinComponent {
         var savedStateHandle = SavedStateHandle()
         var breakoutSessionToJoinViewModel: BreakoutSessionToJoinViewModel =
             BreakoutSessionToJoinViewModel(savedStateHandle)
-        SessionToJoinPanel(breakoutSessionToJoinViewModel)
+        val onBackPressed:()->Unit = {
+        }
+        val onPopUp:()->Unit = {
+        }
+        val onClose:()->Unit = {
+        }
+        SessionToJoinPanel(breakoutSessionToJoinViewModel, onBackPressed, onPopUp, onClose)
     }
 
     /**
@@ -228,6 +237,50 @@ class BreakoutSessionJoinComponent {
                 )
             }
         }
+    }
+
+
+    @Composable
+    fun ActionBar(title: String, onBackIconPressed:()->Unit, onPopUpClick:()->Unit, onCLoseClick:()->Unit) {
+        TopAppBar(
+            title = {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_breakout),
+                        contentDescription = stringResource(id = R.string.app_name),
+                        modifier = Modifier
+                            .size(40.dp)
+                            .padding(0.dp, 0.dp, 6.dp, 0.dp)
+                    )
+                    Text(text = title, modifier = Modifier.weight(1f))
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_breakout),
+                        contentDescription = stringResource(id = R.string.app_name),
+                        modifier = Modifier
+                            .size(20.dp)
+                            .padding(0.dp, 0.dp, 6.dp, 0.dp)
+                    )
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_breakout),
+                        contentDescription = stringResource(id = R.string.app_name),
+                        modifier = Modifier
+                            .size(20.dp)
+                            .padding(0.dp, 0.dp, 6.dp, 0.dp)
+                    )
+                }
+            },
+            navigationIcon = {
+                IconButton(onClick = onBackIconPressed) {
+                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "back")
+                }
+            },
+            backgroundColor = Color.Transparent,
+            contentColor = Color.Gray,
+            elevation = 2.dp
+        )
     }
 
 }
