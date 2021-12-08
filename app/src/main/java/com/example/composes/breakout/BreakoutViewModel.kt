@@ -7,7 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.composes.MyApplication
+import com.example.composes.TeamsApplication
 import com.example.composes.R
 import com.example.composes.breakout.repo.BreakoutSession
 import com.example.composes.breakout.repo.BroadcastType
@@ -25,8 +25,8 @@ class BreakoutViewModel : ViewModel() {
     private var broadcastSessionPosition by mutableStateOf(0)
     private var broadcastGroupPosition by mutableStateOf(0)
     var broadcastGroupList: List<BroadcastType> = listOf (
-        BroadcastType(ALL_COHOST_PRESENTER, MyApplication.getInstance()?.applicationContext?.resources?.getString(R.string.BO_BREAKOUT_SESSION_BROADCAST_ALL_PRESENTERS)),
-        BroadcastType(ALL_PARTICIPANTS, MyApplication.getInstance()?.applicationContext?.resources?.getString(R.string.BO_BREAKOUT_SESSION_BROADCAST_ALL_PARTICIPANTS)),
+        BroadcastType(ALL_COHOST_PRESENTER, TeamsApplication.applicationContext()?.resources?.getString(R.string.BO_BREAKOUT_SESSION_BROADCAST_ALL_PRESENTERS)),
+        BroadcastType(ALL_PARTICIPANTS, TeamsApplication.applicationContext()?.resources?.getString(R.string.BO_BREAKOUT_SESSION_BROADCAST_ALL_PARTICIPANTS)),
     )
     private set
 
@@ -52,7 +52,7 @@ class BreakoutViewModel : ViewModel() {
             broadcastSessionsList.add(BroadcastType(it.id.toString(), it.name))
         }
 
-        MyApplication.getInstance()?.applicationContext?.resources?.let{
+        TeamsApplication.applicationContext()?.resources?.let{
             broadcastSessionsList.add(0, BroadcastType(ALL_BREAKOUT_SESSIONS, it.getString(R.string.BO_BREAKOUT_SESSION_BROADCAST_ALL_SESSIONS)))
         }
     }

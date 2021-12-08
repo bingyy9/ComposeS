@@ -1,0 +1,27 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Message Button for Tablet -->
+    <dimen name="meeting_message_button_margin_bottom">50dp</dimen>
+    <dimen name="overlay_view_max_size">200dp</dimen>
+    <dimen name="overlay_view_default_ratio_size">112dp</dimen>
+
+    <dimen name="overlay_video_max_size">200dp</dimen>
+    <dimen name="overlay_video_min_size">112dp</dimen>
+
+    <dimen name="reaction_bubble_emoji_size">30dp</dimen>
+
+    <dimen name="reaction_bubble_container_width">180dp</dimen>
+    <dimen name="video_raise_hand_margin">12dp</dimen>
+
+    <dimen name="new_interstitial_camera_swap_icon_margin_top">16dp</dimen>
+    <dimen name="new_interstitial_camera_swap_icon_margin_end">16dp</dimen>
+
+    <dimen name="new_interstitial_camera_swap_icon_width">40dp</dimen>
+    <dimen name="new_interstitial_camera_swap_icon_height">40dp</dimen>
+
+    <dimen name="lobby_avatar_margin_top">160dp</dimen>
+    <dimen name="lobby_text_margin">192dp</dimen>
+    <dimen name="lobby_text_margin_top">28dp</dimen>
+    <dimen name="lobby_avatar_size">122dp</dimen> <!-- 12.5% of actual avatar size 108dp -->
+    <dimen name="lobby_avatar_img_size">108dp</dimen>
+    <dimen name="call_switch_layout_container_width">360dp</dimen>
+</resources>

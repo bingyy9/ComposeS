@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="window_light_status_bar">true</bool>
+    <bool name="window_light_navigation_bar">true</bool>
+    <bool name="tablet">false</bool>
+    <bool name="call_embedded_participant_list">false</bool>
+</resources>
