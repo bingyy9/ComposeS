@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.viewModels
+import com.example.composes.breakout.repo.BroadcastType
 import com.webex.teams.ui.calls.FullScreenDialogFragment
 
 class BreakoutSessionBroadcastFragment : FullScreenDialogFragment() {
@@ -26,8 +26,13 @@ class BreakoutSessionBroadcastFragment : FullScreenDialogFragment() {
         }
     }
 
-    fun onCancel(){
+    private fun onSendBroadcast(session: BroadcastType, group: BroadcastType, message: String) {
+        dismiss()
+        breakoutViewModel.onSendBroadcast(session, group, message)
+    }
 
+    private fun onCancel(){
+        dismiss()
     }
 
     @Composable
@@ -35,8 +40,8 @@ class BreakoutSessionBroadcastFragment : FullScreenDialogFragment() {
         BroadcastView(
             breakoutViewModel.broadcastSessionsList,
             breakoutViewModel.broadcastGroupList,
-            breakoutViewModel::onSendBroadcast,
-            onCancel = this::onCancel
+            this::onSendBroadcast,
+            this::onCancel
         )
     }
 
