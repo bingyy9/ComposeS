@@ -35,6 +35,10 @@ class BreakoutSessionAssignViewModel : ViewModel() {
         waitingAssignUserCount = 10
     }
 
+    fun onAssignTypeSelected(assignType: AssignType){
+        this.assignType = assignType
+    }
+
     fun onCreateBreakoutSession(sessionNum: Int, assignType: AssignType, autoAssignCohost: Boolean){
         TeamsLogger.info(TAG, "$sessionNum + $assignType + $autoAssignCohost")
         this.autoAssignCohost = autoAssignCohost

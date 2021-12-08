@@ -28,11 +28,14 @@
     <string name="participants_per_session">%s participants per session</string>
     <string name="participant_per_session">%s participant per session</string>
     <string name="no_assigned_participants">No assigned participants</string>
-    <string name="assign_participants_manually">Assign participants manually later.</string>
+    <string name="assign_participants_manually_later">Assign participants manually later.</string>
+    <string name="assign_participants_automatically">Assign participants automatically</string>
+    <string name="assign_participants_manually">Assign participants manually</string>
+    <string name="let_participants_choose_any_session">Let participants choose any session</string>
+    <string name="automatically_assign_cohost">Automatically assign cohost</string>
 
 
     <string name="create_sessions">Create Sessions</string>
-    <string name="breakout_sessions">Breakout Sessions</string>
     <string name="join">join</string>
     <string name="wait_join_breakout_session_name">%s(%s/%s)</string>
     <string name="choose_to_join_breakout_session_tip">Breakout sessions have started. Choose a session to join.</string>

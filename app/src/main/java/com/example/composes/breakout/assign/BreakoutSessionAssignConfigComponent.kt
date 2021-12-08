@@ -36,12 +36,12 @@ import java.lang.NumberFormatException
 @Composable
 fun BreakoutSessionAssignConfigComponent(
     assignType: AssignType,
+    onAssignTypeSelected: (AssignType) -> Unit,
     waitingAssignUserCount: Int,
     onCreateBreakoutSession: (Int, AssignType, Boolean) -> Unit,
     showDetailAssign: () -> Unit,
     onCancel: () -> Unit,
 ) {
-
     val (sessionNum, setSessionNum) = rememberSaveable { mutableStateOf("1")}
     Column (
         Modifier
@@ -56,6 +56,7 @@ fun BreakoutSessionAssignConfigComponent(
 
         AssignBody(
             assignType,
+            onAssignTypeSelected,
             waitingAssignUserCount,
             sessionNum,
             setSessionNum
@@ -119,27 +120,50 @@ fun AssignTitleRow(
 }
 
 
-@OptIn(ExperimentalAnimationApi::class)
+
 @Composable
 fun AssignBody(
     assignType: AssignType,
+    onAssignTypeSelected: (AssignType) -> Unit,
     waitingAssignUserCount: Int,
     sessionNum: String,
     onSessionNumChange: (String) -> Unit,
 ){
-    Column() {
+    Column {
         InputSessionNum(
             sessionNum = sessionNum,
             onSessionNumChange = onSessionNumChange
         )
 
-        AnimatedVisibility(visible = getSessionNum(sessionNum) > 0) {
-            var assignTip = getAssignTip(getSessionNum(sessionNum), waitingAssignUserCount, assignType)
-            Text(
-                text = assignTip,
-                fontSize = 14.sp,
-            )
-        }
+        AssignHint(
+            assignType,
+            waitingAssignUserCount,
+            sessionNum)
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        AssignOption(
+            AssignType.ASSIGN_PARTICIPANTS_AUTOMATICALLY,
+            onAssignTypeSelected,
+            stringResource(id = R.string.assign_participants_manually),
+            assignType == AssignType.ASSIGN_PARTICIPANTS_AUTOMATICALLY,
+        )
+
+        AssignOption(
+            AssignType.ASSIGN_PARTICIPANTS_MANUALLY,
+            onAssignTypeSelected,
+            stringResource(id = R.string.assign_participants_manually),
+            assignType == AssignType.ASSIGN_PARTICIPANTS_MANUALLY,
+        )
+
+        AssignOption(
+            AssignType.LET_PARTICIPANTS_CHOOSE_ANY_SESSION,
+            onAssignTypeSelected,
+            stringResource(id = R.string.let_participants_choose_any_session),
+            assignType == AssignType.LET_PARTICIPANTS_CHOOSE_ANY_SESSION,
+        )
+
+
 
     }
 }
@@ -199,7 +223,7 @@ fun getAssignTip(sessionNum: Int, waitingAssignUserCount: Int, assignType: Assig
 
         }
         AssignType.ASSIGN_PARTICIPANTS_MANUALLY -> {
-            return stringResource(id = R.string.assign_participants_manually)
+            return stringResource(id = R.string.assign_participants_manually_later)
         }
         AssignType.LET_PARTICIPANTS_CHOOSE_ANY_SESSION -> {
             return stringResource(id = R.string.no_assigned_participants)
@@ -249,6 +273,50 @@ fun InputSessionNum(
             })
         )
     }
+}
+
+@OptIn(ExperimentalAnimationApi::class)
+@Composable
+fun AssignHint(
+    assignType: AssignType,
+    waitingAssignUserCount: Int,
+    sessionNum: String,
+){
+    AnimatedVisibility(visible = getSessionNum(sessionNum) > 0) {
+        var assignTip = getAssignTip(getSessionNum(sessionNum), waitingAssignUserCount, assignType)
+        Text(
+            text = assignTip,
+            fontSize = 14.sp,
+        )
+    }
+}
+
+@Composable
+fun AssignOption(
+    assignType: AssignType,
+    onAssignTypeSelected: (AssignType) -> Unit,
+    text: String,
+    selected: Boolean,
+){
+    Row(
+        Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        RadioButton(
+            selected = selected,
+            modifier = Modifier.padding(8.dp),
+            onClick = { onAssignTypeSelected(assignType) }
+        )
+        Text(
+            text = text,
+            modifier = Modifier.padding(start = 2.dp)
+        )
+    }
+}
+
+@Composable
+fun AssignCoHost(){
+
 }
 
 @Composable

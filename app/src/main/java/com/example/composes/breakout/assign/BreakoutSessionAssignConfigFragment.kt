@@ -30,6 +30,7 @@ class BreakoutSessionAssignConfigFragment : FullScreenDialogFragment() {
     fun ContentView(){
         BreakoutSessionAssignConfigComponent(
             breakoutAssignViewModel.assignType,
+            breakoutAssignViewModel:: onAssignTypeSelected,
             breakoutAssignViewModel.waitingAssignUserCount,
             breakoutAssignViewModel::onCreateBreakoutSession,
             this::showDetailAssign,
