@@ -17,4 +17,11 @@
     <string name="broadcast_history">View broadcast history</string>
     <string name="send">Send</string>
     <string name="cancel">Cancel</string>
+
+
+    <string name="create_sessions">Create Sessions</string>
+    <string name="join">join</string>
+    <string name="wait_join_breakout_session_name">%s(%s/%s)</string>
+    <string name="choose_to_join_breakout_session_tip">Breakout sessions have started. Choose a session to join.</string>
+
 </resources>

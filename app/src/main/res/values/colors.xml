@@ -11,4 +11,6 @@
 
     <color name="bo_color_1">#F7F7F7</color>
     <color name="bo_color_2">#178697</color>
+
+    <color name="bo_indicator_bg">#FFDBF0FF</color>
 </resources>
