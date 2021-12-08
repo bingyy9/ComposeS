@@ -1,15 +1,10 @@
 package com.example.composes.todo.one
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.runtime.*
-import androidx.compose.runtime.livedata.observeAsState
-import com.example.composes.breakout.BreakoutViewModel
-import com.example.composes.breakout.BroadcastView
-import com.example.composes.todo.TodoItem
 import com.example.composes.ui.theme.ComposeSTheme
 
 class TodoActivity : ComponentActivity() {

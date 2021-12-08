@@ -12,7 +12,7 @@ import com.example.composes.R
 import com.example.composes.breakout.repo.BreakoutSession
 import com.example.composes.breakout.repo.BroadcastType
 
-class BreakoutViewModel : ViewModel() {
+class BreakoutSessionBroadcastViewModel : ViewModel() {
 
     companion object {
         const val TAG = "BreakoutViewModel"

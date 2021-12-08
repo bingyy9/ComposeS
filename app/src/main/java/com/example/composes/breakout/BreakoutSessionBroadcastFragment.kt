@@ -12,7 +12,7 @@ import com.webex.teams.ui.calls.FullScreenDialogFragment
 
 class BreakoutSessionBroadcastFragment : FullScreenDialogFragment() {
 
-    private val breakoutViewModel by viewModels<BreakoutViewModel>()
+    private val breakoutViewModel by viewModels<BreakoutSessionBroadcastViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
