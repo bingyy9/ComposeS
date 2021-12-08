@@ -26,6 +26,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.composes.R
+import com.example.composes.breakout.BlackBgButton
+import com.example.composes.breakout.WhiteBgButton
 import com.example.composes.breakout.broadcastDropDownMenu
 import com.example.composes.breakout.repo.BroadcastType
 
@@ -204,38 +206,14 @@ fun BroadcastBottomButtonRow(
                 .padding(start = 32.dp)
         )
 
-        Button(
-            onClick = { onSend() },
-            colors = ButtonDefaults.buttonColors(
-                backgroundColor = Color.Black,
-                contentColor = Color.White,
-                disabledBackgroundColor = Color.Black,
-                disabledContentColor = Color.Black
-            ),
-            shape = RoundedCornerShape(20.dp)
-        ) {
-            Text(
-                text = stringResource(id = R.string.send),
-                fontSize = 16.sp,
-                modifier = Modifier.background(Color.Black),
-            )
-        }
+        BlackBgButton(
+            text = stringResource(id = R.string.send),
+            onSend
+        )
 
-        Button(
-            onClick = { onCancel() },
-            Modifier.padding(start = 6.dp, end = 20.dp),
-            colors = ButtonDefaults.buttonColors(
-                backgroundColor = Color.White,
-                contentColor = Color.Black,
-                disabledBackgroundColor = Color.White,
-                disabledContentColor = Color.White
-            ),
-            shape = RoundedCornerShape(20.dp)
-        ) {
-            Text(
-                text = stringResource(id = R.string.cancel),
-                fontSize = 16.sp,
-            )
-        }
+        WhiteBgButton(
+            text = stringResource(id = R.string.cancel),
+            onCancel
+        )
     }
 }

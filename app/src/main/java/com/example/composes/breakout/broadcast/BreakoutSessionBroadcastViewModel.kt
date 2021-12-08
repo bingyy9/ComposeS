@@ -11,11 +11,12 @@ import com.example.composes.TeamsApplication
 import com.example.composes.R
 import com.example.composes.breakout.repo.BreakoutSession
 import com.example.composes.breakout.repo.BroadcastType
+import com.webex.teams.logging.TeamsLogger
 
 class BreakoutSessionBroadcastViewModel : ViewModel() {
 
     companion object {
-        const val TAG = "BreakoutViewModel"
+        const val TAG = "BreakoutSessionBroadcastViewModel"
         const val ALL_BREAKOUT_SESSIONS = "ALL_BREAKOUT_SESSIONS"
         const val ALL_COHOST_PRESENTER = "ALL_COHOST_PRESENTER"
         const val ALL_PARTICIPANTS = "ALL_COHOST_PRESENTER"
@@ -62,7 +63,7 @@ class BreakoutSessionBroadcastViewModel : ViewModel() {
     }
 
     fun onSendBroadcast(session: BroadcastType, group: BroadcastType, message: String) {
-        Log.d(TAG, "${session.name} + ${group.name} + $message")
+        TeamsLogger.info(TAG, "${session.name} + ${group.name} + $message")
     }
 
 

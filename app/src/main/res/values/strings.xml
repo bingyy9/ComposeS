@@ -18,6 +18,18 @@
     <string name="send">Send</string>
     <string name="cancel">Cancel</string>
 
+    <string name="breakout_sessions">Breakout Sessions</string>
+    <string name="back">Back</string>
+    <string name="bo_number_of_breakout_session">Number of breakout session:</string>
+    <string name="bo_number_of_breakout_sessions">Number of breakout sessions:</string>
+    <string name="create_breakout_session">Create breakout session</string>
+    <string name="participants_per_session_dash">%s-%s participants per session</string>
+    <string name="participant_per_session_dash">%s-%s participant per session</string>
+    <string name="participants_per_session">%s participants per session</string>
+    <string name="participant_per_session">%s participant per session</string>
+    <string name="no_assigned_participants">No assigned participants</string>
+    <string name="assign_participants_manually">Assign participants manually later.</string>
+
 
     <string name="create_sessions">Create Sessions</string>
     <string name="join">join</string>

@@ -20,6 +20,7 @@ import androidx.fragment.app.FragmentManager
 import com.cisco.webex.teams.utils.LoggingTags.CALLING_TAG
 import com.example.composes.breakout.anyonecanjoin.BreakoutSessionJoinComponent
 import com.example.composes.breakout.anyonecanjoin.BreakoutSessionToJoinViewModel
+import com.example.composes.breakout.assign.BreakoutSessionAssignConfigFragment
 import com.example.composes.breakout.broadcast.BreakoutSessionBroadcastFragment
 import com.example.composes.breakout.broadcast.BreakoutSessionBroadcastViewModel
 import com.example.composes.ui.theme.ComposeSTheme
@@ -95,6 +96,23 @@ class TestActivity : AppCompatActivity() {
                     modifier = Modifier.background(Color.Black),
                 )
             }
+
+            Button(
+                onClick = { showBreakoutSessionAssignConfig() },
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = Color.Black,
+                    contentColor = Color.White,
+                    disabledBackgroundColor = Color.Black,
+                    disabledContentColor = Color.Black
+                ),
+                shape = RoundedCornerShape(20.dp)
+            ) {
+                Text(
+                    text = "Broadcast Assign Config",
+                    fontSize = 16.sp,
+                    modifier = Modifier.background(Color.Black),
+                )
+            }
         }
     }
 
@@ -104,6 +122,17 @@ class TestActivity : AppCompatActivity() {
         var fragmentManager: FragmentManager = this.supportFragmentManager
 //        if (isDualPane) {
             BreakoutSessionBroadcastFragment.newInstance().show(fragmentManager, BreakoutSessionBroadcastFragment.DIALOG_TAG)
+//        } else {
+////            startNavigation(NavigationTo.CallStatistics)
+//        }
+    }
+
+    fun showBreakoutSessionAssignConfig(){
+        val isDualPane = OSUtils.isDualPane(this)
+        TeamsLogger.info(CALLING_TAG, "isDualPane $isDualPane")
+        var fragmentManager: FragmentManager = this.supportFragmentManager
+//        if (isDualPane) {
+        BreakoutSessionAssignConfigFragment.newInstance().show(fragmentManager, BreakoutSessionAssignConfigFragment.DIALOG_TAG)
 //        } else {
 ////            startNavigation(NavigationTo.CallStatistics)
 //        }
