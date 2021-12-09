@@ -8,9 +8,14 @@
         <entry key="../../../../layout/compose-model-1637722313596.xml" value="0.335" />
         <entry key="../../../../layout/compose-model-1637723801370.xml" value="0.8591549295774648" />
         <entry key="../../../../layout/compose-model-1638755117418.xml" value="0.1" />
+        <entry key="../../../../layout/compose-model-1638942085476.xml" value="0.1" />
+        <entry key="../../../../layout/compose-model-1638959279544.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_dnd_presence_regular.xml" value="0.1725" />
         <entry key="app/src/main/res/drawable/ic_document_filled.xml" value="0.1725" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1725" />
+        <entry key="app/src/main/res/layout/activity_in_call.xml" value="0.16302083333333334" />
+        <entry key="app/src/main/res/layout/content_in_call.xml" value="0.16302083333333334" />
+        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.16302083333333334" />
       </map>
     </option>
   </component>
