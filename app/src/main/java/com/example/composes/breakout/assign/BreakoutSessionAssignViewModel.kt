@@ -20,7 +20,7 @@ class BreakoutSessionAssignViewModel : ViewModel() {
     var waitingAssignUserCount by mutableStateOf(0)
     //monitor sessionNum change, trigger ui update
     var sessionNum = 1
-    var autoAssignCohost = false
+    var autoAssignCoHost = false
     var assignType by mutableStateOf(AssignType.ASSIGN_PARTICIPANTS_AUTOMATICALLY)
 
     companion object {
@@ -39,9 +39,9 @@ class BreakoutSessionAssignViewModel : ViewModel() {
         this.assignType = assignType
     }
 
-    fun onCreateBreakoutSession(sessionNum: Int, assignType: AssignType, autoAssignCohost: Boolean){
-        TeamsLogger.info(TAG, "$sessionNum + $assignType + $autoAssignCohost")
-        this.autoAssignCohost = autoAssignCohost
+    fun onCreateBreakoutSession(sessionNum: Int, assignType: AssignType, autoAssignCoHost: Boolean){
+        TeamsLogger.info(TAG, "sessionNum: $sessionNum, assignType: $assignType, autoAssignCoHost: $autoAssignCoHost")
+        this.autoAssignCoHost = autoAssignCoHost
         this.sessionNum = sessionNum
         this.assignType = assignType
         //invoke create breakout session interface

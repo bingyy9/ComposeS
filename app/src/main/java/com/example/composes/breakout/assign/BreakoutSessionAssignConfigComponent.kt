@@ -43,10 +43,15 @@ fun BreakoutSessionAssignConfigComponent(
     onCancel: () -> Unit,
 ) {
     val (sessionNum, setSessionNum) = rememberSaveable { mutableStateOf("1")}
+    val (checkedCoHost, setCheckedCoHost) = rememberSaveable { mutableStateOf(false)}
+    if(assignType != AssignType.ASSIGN_PARTICIPANTS_AUTOMATICALLY){
+        setCheckedCoHost(false)
+    }
+
     Column (
         Modifier
-            .verticalScroll(rememberScrollState())
             .padding(start = 14.dp, end = 14.dp, top = 17.dp, bottom = 17.dp)
+            .fillMaxSize()
 
     ){
         AssignTitleRow(
@@ -59,11 +64,15 @@ fun BreakoutSessionAssignConfigComponent(
             onAssignTypeSelected,
             waitingAssignUserCount,
             sessionNum,
-            setSessionNum
+            setSessionNum,
+            checkedCoHost,
+            setCheckedCoHost
         )
 
         AssignBottomButton(
-            onCreateBreakoutSession = { },
+            onCreateBreakoutSession = {
+                onCreateBreakoutSession(getSessionNum(sessionNum), assignType, checkedCoHost)
+            },
             onCancel = onCancel
         )
 
@@ -128,8 +137,10 @@ fun AssignBody(
     waitingAssignUserCount: Int,
     sessionNum: String,
     onSessionNumChange: (String) -> Unit,
+    checkedCoHost: Boolean,
+    onCheckedCoHost: (Boolean) -> Unit,
 ){
-    Column {
+    Column (Modifier.fillMaxHeight(0.9f)){
         InputSessionNum(
             sessionNum = sessionNum,
             onSessionNumChange = onSessionNumChange
@@ -147,6 +158,12 @@ fun AssignBody(
             onAssignTypeSelected,
             stringResource(id = R.string.assign_participants_manually),
             assignType == AssignType.ASSIGN_PARTICIPANTS_AUTOMATICALLY,
+        )
+
+        AssignCoHost(
+            text = stringResource(id = R.string.automatically_assign_cohost),
+            checked = checkedCoHost,
+            onCheckedChange = onCheckedCoHost
         )
 
         AssignOption(
@@ -315,7 +332,26 @@ fun AssignOption(
 }
 
 @Composable
-fun AssignCoHost(){
+fun AssignCoHost(
+    text: String,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit
+){
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .padding(start = 20.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Checkbox(
+            checked = checked,
+            onCheckedChange = onCheckedChange
+        )
+        Text(
+            text = text,
+            modifier = Modifier.padding(start = 2.dp)
+        )
+    }
 
 }
 
